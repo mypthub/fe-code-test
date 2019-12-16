@@ -43,6 +43,11 @@
     <p>
       A design for the <code>Product.vue</code> component has been put together
       and can be found here:
+      <a
+        href="https://www.figma.com/file/bdgMzCq95xv9fHTsVq1gNL/Untitled?node-id=0%3A1"
+        target="_blank"
+        >Figma</a
+      >
     </p>
   </div>
 </template>
