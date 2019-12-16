@@ -1,24 +1,7 @@
 # code-test
 
-## Project setup
-```
-npm install
-```
+Get started by cloning the repo, Run `npm` and then `npm run serve`.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+The instructions are on the first page.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Good luck!
