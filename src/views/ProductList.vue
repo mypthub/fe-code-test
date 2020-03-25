@@ -3,8 +3,12 @@
     <label for="selector">
       Filter:
       <select v-model="select" id="selector">
-        <option value="all" selected>All</option>
-        <option value="test" selected>test</option>
+        <option
+          v-for="(option, idx) in selectOptions"
+          :key="'option' + idx"
+          :value="option.value"
+          v-text="option.label"
+        ></option>
       </select>
     </label>
     <h1>SELECTED FILTER: {{ selectedFilter }}</h1>
@@ -29,20 +33,41 @@ export default {
   },
   computed: {
     /**
-     * BUG FIXES:
-     * For loop implemented incorrectly.
-     * Removed redundant loops added additional if to catch empty state.
-     * Sorted Products by order.
+     * Display filterd list of products
+     * @param {array} productItems
+     * @param {string} this.selectedFilter
+     * @returns {array} products
      */
     products() {
       if (productItems.length > 0) {
         let products = [...new Array()];
-        if (this.selectedFilter == "all") {
-          products = productItems;
-          products.sort((a, b) => a.order - b.order);
-          return products;
+
+        switch (this.selectedFilter) {
+          case "all":
+            products = productItems;
+            break;
+
+          case "purchased":
+            products = this.filterProducts("purchased", true);
+            break;
+
+          case "unpurchased":
+            products = this.filterProducts("purchased", false);
+            break;
+
+          case "onetime":
+            products = this.filterProducts("type", "onetime");
+            break;
+
+          case "subscriptions":
+            products = this.filterProducts("type", "recurring");
+            break;
+
+          default:
+            break;
         }
-        return "product";
+        products.sort((a, b) => a.order - b.order);
+        return products;
       }
       return "product";
     }
@@ -50,17 +75,54 @@ export default {
   data() {
     return {
       select: "all",
-      selectedFilter: "all"
+      selectedFilter: "all",
+      selectOptions: [
+        {
+          label: "All",
+          value: "all"
+        },
+        {
+          label: "Purchased",
+          value: "purchased"
+        },
+        {
+          label: "Unpurchased",
+          value: "unpurchased"
+        },
+        {
+          label: "One time purchases",
+          value: "onetime"
+        },
+        {
+          label: "Subscriptions",
+          value: "subscriptions"
+        }
+      ]
     };
   },
   watch: {
-    /**
-     * BUG FIXED:
-     * Params ordered incorrectly.
-     * Removed oldVal as per linting rules.
-     */
     select: function(newVal) {
       this.selectedFilter = newVal;
+    }
+  },
+  methods: {
+    /**
+     * filter products based on user selection
+     * @param {string} key The {product} key used to filter
+     * @param {boolean, string, number} value The value of they key used to check truthy
+     * @returns {array} tempProducts
+     */
+    filterProducts(key, value) {
+      let tempProducts = [...new Array()];
+
+      for (let idx = 0; idx < productItems.length; idx++) {
+        const product = productItems[idx];
+
+        if (product[key] == value) {
+          tempProducts.push(product);
+        }
+      }
+      return tempProducts;
     }
   }
 };
@@ -74,21 +136,25 @@ export default {
 .productList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
 
   > * {
     flex: 0 0 1;
+    box-sizing: border-box;
+    text-align: center;
+    margin-left: ($gutter / 2);
+    margin-right: ($gutter / 2);
 
     @include breakpoint("sm") {
-      flex: 0 0 (50% - $gutter);
+      flex: 0 0 calc(50% - #{$gutter});
     }
 
     @include breakpoint("md") {
-      flex: 0 0 (33.333% - $gutter);
+      flex: 0 0 calc(33.333% - #{$gutter});
     }
 
     @include breakpoint("lg") {
-      flex: 0 0 (25% - $gutter);
+      flex: 0 0 calc(25% - #{$gutter});
     }
   }
 }

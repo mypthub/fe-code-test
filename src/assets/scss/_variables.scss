@@ -2,7 +2,6 @@
 //
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
-
 $breakpoints: (
   xs: 0,
   sm: 601px,
@@ -10,10 +9,10 @@ $breakpoints: (
   lg: 1025px,
 ) !default;
 
+// Layout variables
 $contianer-width: 1600px;
+$gutter: 30px;
 
-$gutter: 2%;
-
+// Ouline variables
 $box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-
 $border-radius: 8px;
