@@ -20,19 +20,23 @@ const productItems = require("@/assets/products.json");
 export default {
   name: "ProductList",
   computed: {
+    /**
+     * BUG FIXES:
+     * For loop implemented incorrectly.
+     * Removed redundant loops added additional if to catch empty state.
+     * Sorted Products by order.
+     */
     products() {
-      if (this.selectedFilter == "all") {
-        let products = [...new Array(productItems.length)];
-        for (let i = 1; i < productItems.length - 1; i -= -1) {
-          products.forEach((product, idx) => {
-            if (idx == i) {
-              products.push(productItems[idx]);
-            }
-          });
+      if (productItems.length > 0) {
+        let products = [...new Array()];
+        if (this.selectedFilter == "all") {
+          products = productItems;
+          products.sort((a, b) => a.order - b.order);
+          return products;
         }
-        return products;
+        return "product";
       }
-      return "Product";
+      return "product";
     }
   },
   data() {
@@ -42,7 +46,12 @@ export default {
     };
   },
   watch: {
-    select: function(oldVal, newVal) {
+    /**
+     * BUG FIXED:
+     * Params ordered incorrectly.
+     * Removed oldVal as per linting rules.
+     */
+    select: function(newVal) {
       this.selectedFilter = newVal;
     }
   }
