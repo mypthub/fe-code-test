@@ -72,6 +72,8 @@ export default {
   margin: auto;
 }
 .productList {
-  display: inline-block;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  grid-gap: 1rem;
 }
 </style>
