@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <label for="selector">
       Filter:
       <select v-model="select" id="selector">
@@ -8,17 +8,25 @@
       </select>
     </label>
     <h1>SELECTED FILTER: {{ selectedFilter }}</h1>
-    <div v-for="(product, idx) in products" :key="idx">
-      {{ product ? product.title : "" }}
+    <div class="productList">
+      <ProductCard
+        v-for="(product, idx) in products"
+        :key="idx"
+        :product="product"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import ProductCard from "@/components/ProductCard";
 const productItems = require("@/assets/products.json");
 
 export default {
   name: "ProductList",
+  components: {
+    ProductCard
+  },
   computed: {
     /**
      * BUG FIXES:
@@ -57,3 +65,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+  max-width: 1600px;
+  margin: auto;
+}
+.productList {
+  display: inline-block;
+}
+</style>
