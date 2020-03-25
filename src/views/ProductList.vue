@@ -68,12 +68,28 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  max-width: 1600px;
+  max-width: $contianer-width;
   margin: auto;
 }
 .productList {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
-  grid-gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  > * {
+    flex: 0 0 1;
+
+    @include breakpoint("sm") {
+      flex: 0 0 (50% - $gutter);
+    }
+
+    @include breakpoint("md") {
+      flex: 0 0 (33.333% - $gutter);
+    }
+
+    @include breakpoint("lg") {
+      flex: 0 0 (25% - $gutter);
+    }
+  }
 }
 </style>

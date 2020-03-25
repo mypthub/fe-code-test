@@ -55,11 +55,11 @@ export default {
 .product {
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: $border-radius;
   background: #fff;
-  max-width: 400px;
   margin-bottom: 2rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+  box-shadow: $box-shadow;
+  width: 100%;
 
   img {
     width: 100%;
