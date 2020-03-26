@@ -1,50 +1,165 @@
 <template>
-  <div>
+  <div class="container">
     <label for="selector">
       Filter:
       <select v-model="select" id="selector">
-        <option value="all" selected>All</option>
-        <option value="test" selected>test</option>
+        <option
+          v-for="(option, idx) in selectOptions"
+          :key="'option' + idx"
+          :value="option.value"
+          v-text="option.label"
+        ></option>
       </select>
     </label>
     <h1>SELECTED FILTER: {{ selectedFilter }}</h1>
-    <div v-for="(product, idx) in products" :key="idx">
-      {{ product ? product.title : "" }}
+    <div class="productList" v-if="products.length > 0">
+      <ProductCard
+        v-for="(product, idx) in products"
+        :key="idx"
+        :product="product"
+      />
+    </div>
+    <div v-else>
+      <h4>Sorry, no products found.</h4>
     </div>
   </div>
 </template>
 
 <script>
+import ProductCard from "@/components/ProductCard";
 const productItems = require("@/assets/products.json");
 
 export default {
   name: "ProductList",
+  components: {
+    ProductCard
+  },
   computed: {
+    /**
+     * Display filterd list of products
+     * @param {array} productItems
+     * @param {string} this.selectedFilter
+     * @returns {array} products
+     */
     products() {
-      if (this.selectedFilter == "all") {
-        let products = [...new Array(productItems.length)];
-        for (let i = 1; i < productItems.length - 1; i -= -1) {
-          products.forEach((product, idx) => {
-            if (idx == i) {
-              products.push(productItems[idx]);
-            }
-          });
+      let products = [...new Array()];
+
+      if (productItems.length > 0) {
+        switch (this.selectedFilter) {
+          case "all":
+            products = productItems;
+            break;
+
+          case "purchased":
+            products = this.filterProducts("purchased", true);
+            break;
+
+          case "unpurchased":
+            products = this.filterProducts("purchased", false);
+            break;
+
+          case "onetime":
+            products = this.filterProducts("type", "onetime");
+            break;
+
+          case "subscriptions":
+            products = this.filterProducts("type", "recurring");
+            break;
+
+          default:
+            products.sort((a, b) => a.order - b.order);
+            break;
         }
         return products;
       }
-      return "Product";
+      return products;
     }
   },
   data() {
     return {
       select: "all",
-      selectedFilter: "all"
+      selectedFilter: "all",
+      selectOptions: [
+        {
+          label: "All",
+          value: "all"
+        },
+        {
+          label: "Purchased",
+          value: "purchased"
+        },
+        {
+          label: "Unpurchased",
+          value: "unpurchased"
+        },
+        {
+          label: "One time purchases",
+          value: "onetime"
+        },
+        {
+          label: "Subscriptions",
+          value: "subscriptions"
+        }
+      ]
     };
   },
   watch: {
-    select: function(oldVal, newVal) {
+    select: function(newVal) {
       this.selectedFilter = newVal;
+    }
+  },
+  methods: {
+    /**
+     * filter products based on object key and value
+     * @param {string} key The {product} key to filter upon
+     * @param {boolean, string, number} value The value to check against
+     * @returns {array} tempProducts
+     */
+    filterProducts(key, value) {
+      let tempProducts = [...new Array()];
+
+      for (let idx = 0; idx < productItems.length; idx++) {
+        const product = productItems[idx];
+
+        if (product[key] == value) {
+          tempProducts.push(product);
+        }
+      }
+      return tempProducts;
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+  max-width: $contianer-width;
+  margin: auto;
+}
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  > * {
+    flex-grow: 1;
+    box-sizing: border-box;
+    text-align: center;
+    margin-left: ($gutter / 2);
+    margin-right: ($gutter / 2);
+    margin-bottom: 2rem;
+
+    @include breakpoint("sm") {
+      flex: 0 0 calc(50% - #{$gutter});
+    }
+
+    @include breakpoint("md") {
+      flex: 0 0 calc(33.333% - #{$gutter});
+    }
+
+    @include breakpoint("lg") {
+      flex: 0 0 calc(25% - #{$gutter});
+    }
+  }
+}
+</style>

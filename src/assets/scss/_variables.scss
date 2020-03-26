@@ -1,0 +1,24 @@
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$breakpoints: (
+  xs: 0,
+  sm: 601px,
+  md: 801px,
+  lg: 1025px,
+) !default;
+
+// Layout variables
+$contianer-width: 1600px;
+$gutter: 30px;
+
+// Ouline variables
+$border-radius: 8px;
+
+// Colors
+$white: #fff;
+$black: #000;
+$dark-gray: #1A202C;
+
+$success: #38a169;
