@@ -12,12 +12,15 @@
       </select>
     </label>
     <h1>SELECTED FILTER: {{ selectedFilter }}</h1>
-    <div class="productList">
+    <div class="productList" v-if="products.length > 0">
       <ProductCard
         v-for="(product, idx) in products"
         :key="idx"
         :product="product"
       />
+    </div>
+    <div v-else>
+      <h4>Sorry, no products found.</h4>
     </div>
   </div>
 </template>
@@ -107,9 +110,9 @@ export default {
   },
   methods: {
     /**
-     * filter products based on user selection
-     * @param {string} key The {product} key used to filter
-     * @param {boolean, string, number} value The value of they key used to check truthy
+     * filter products based on object key and value
+     * @param {string} key The {product} key to filter upon
+     * @param {boolean, string, number} value The value to check against
      * @returns {array} tempProducts
      */
     filterProducts(key, value) {

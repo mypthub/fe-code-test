@@ -1,6 +1,8 @@
 <template>
   <div class="product">
     <img
+      width="400"
+      height="300"
       v-if="product.image"
       :src="product.image"
       class="product__image"
