@@ -1,13 +1,10 @@
 <template>
-  <div class="product">
-    <img
-      width="400"
-      height="300"
-      v-if="product.image"
-      :src="product.image"
-      class="product__image"
-      :alt="product ? product.title : ''"
-    />
+  <div
+    class="product"
+    :style="{
+      backgroundImage: 'url(' + product.image + ')'
+    }"
+  >
     <div class="product__content">
       <div class="product__title">
         {{ product ? product.title : "" }}
@@ -74,22 +71,23 @@ export default {
 
 <style lang="scss" scoped>
 .product {
-  position: relative;
+  display: flex;
+  align-items: flex-end;
   overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   border-radius: $border-radius;
-  background: #fff;
-  margin-bottom: 2rem;
-  box-shadow: $box-shadow;
-  width: 100%;
-
-  img {
-    width: 100%;
-    height: auto;
-  }
+  background-color: $black;
+  width: 16rem;
+  height: 14rem;
 
   .product__content {
-    padding: 16px;
+    color: $white;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
     text-align: left;
+    padding: 8px;
 
     p {
       margin-bottom: 0;
@@ -99,7 +97,7 @@ export default {
       float: right;
       width: 32px;
       height: 32px;
-      color: #38a169;
+      color: $success;
     }
 
     .product__title {

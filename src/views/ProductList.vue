@@ -142,7 +142,7 @@ export default {
   justify-content: center;
 
   > * {
-    flex: 0 0 1;
+    flex-grow: 1;
     box-sizing: border-box;
     text-align: center;
     margin-left: ($gutter / 2);
