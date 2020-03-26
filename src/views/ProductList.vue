@@ -39,9 +39,9 @@ export default {
      * @returns {array} products
      */
     products() {
-      if (productItems.length > 0) {
-        let products = [...new Array()];
+      let products = [...new Array()];
 
+      if (productItems.length > 0) {
         switch (this.selectedFilter) {
           case "all":
             products = productItems;
@@ -64,12 +64,12 @@ export default {
             break;
 
           default:
+            products.sort((a, b) => a.order - b.order);
             break;
         }
-        products.sort((a, b) => a.order - b.order);
         return products;
       }
-      return "product";
+      return products;
     }
   },
   data() {
@@ -144,6 +144,7 @@ export default {
     text-align: center;
     margin-left: ($gutter / 2);
     margin-right: ($gutter / 2);
+    margin-bottom: 2rem;
 
     @include breakpoint("sm") {
       flex: 0 0 calc(50% - #{$gutter});
