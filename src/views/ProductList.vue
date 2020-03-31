@@ -21,7 +21,7 @@
         </b-form-select>
       </b-col>
     </b-row>
-    <b-row>
+    <b-row v-if="products.length > 0">
       <b-col
         sm="12"
         md="6"
@@ -30,6 +30,11 @@
         :key="index"
       >
         <Product :product="product" />
+      </b-col>
+    </b-row>
+    <b-row v-else>
+      <b-col>
+        <h3>Sorry, no products found.</h3>
       </b-col>
     </b-row>
     <div class="mt-3">

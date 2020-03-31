@@ -13,7 +13,7 @@
           {{ product.price }}
         </span>
         <span class="discounted" v-if="product.discount">
-          <!-- discounted price to go here -->
+          {{ priceAfterDiscount(product) }}
         </span>
       </div>
       <p class="mt-3 mb-0">{{ product.description }}</p>
@@ -28,6 +28,18 @@ export default {
     product: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    priceAfterDiscount(product) {
+      return (
+        product.price -
+        (parseInt(product.price) *
+          parseInt(
+            product.discount.substring(0, product.discount.length - 1)
+          )) /
+          100.0
+      );
     }
   }
 };
