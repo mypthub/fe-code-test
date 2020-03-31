@@ -9,11 +9,11 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.use(BootstrapVue);
 Vue.use(VueCurrencyFilter, {
   symbol: "£",
-  thousandsSeparator: ",",
+  thousandsSeparator: "",
   fractionCount: 2,
   fractionSeparator: ".",
   symbolPosition: "front",
-  symbolSpacing: false
+  symbolSpacing: true
 });
 
 Vue.config.productionTip = false;
