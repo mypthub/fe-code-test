@@ -10,10 +10,10 @@
       <h5 class="mb-0">{{ product.title }}</h5>
       <div class="price">
         <span :class="{ original: product.discount !== null }">
-          {{ product.price | currency }}
+          {{ (product.price / 100) | currency }}
         </span>
         <span class="discounted" v-if="product.discount">
-          {{ priceAfterDiscount(product) | currency }}
+          {{ (priceAfterDiscount(product) / 100) | currency }}
         </span>
       </div>
       <p class="mt-3 mb-0">{{ product.description }}</p>
