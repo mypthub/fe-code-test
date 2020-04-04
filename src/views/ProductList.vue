@@ -10,34 +10,45 @@
         <option value="subscriptions" selected>Subscriptions</option>
       </select>
     </label>
-    <h1>SELECTED FILTER: {{ selectedFilter }}</h1>
-    <div v-for="(product, idx) in products" :key="idx">
-      {{ product ? product.title : "" }}
-    </div>
+    <ul>
+      <li v-for="product in products" :key="product.id">
+        <Product
+          :title="product.title"
+          :price="product.price"
+          :description="product.description"
+          :image="product.image"
+          :discount="product.discount"
+        ></Product>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import Product from "../components/Product";
+
 const productItems = require("@/assets/products.json");
 
 export default {
   name: "ProductList",
+  components: { Product },
+
   computed: {
     products() {
       if (this.selectedFilter === "all") {
         return productItems;
         // return products;
       } else if (this.selectedFilter === "purchased") {
-          let products = [];
-          productItems.forEach((productItem) => {
-            if (productItem.purchased) {
-              products.push(productItem);
-            }
+        let products = [];
+        productItems.forEach(productItem => {
+          if (productItem.purchased) {
+            products.push(productItem);
+          }
         });
-          return products;
+        return products;
       } else if (this.selectedFilter === "unpurchased") {
         let products = [];
-        productItems.forEach((productItem) => {
+        productItems.forEach(productItem => {
           if (!productItem.purchased) {
             products.push(productItem);
           }
@@ -45,7 +56,7 @@ export default {
         return products;
       } else if (this.selectedFilter === "one-time-purchases") {
         let products = [];
-        productItems.forEach((productItem) => {
+        productItems.forEach(productItem => {
           if (productItem.type === "onetime") {
             products.push(productItem);
           }
@@ -53,7 +64,7 @@ export default {
         return products;
       } else if (this.selectedFilter === "subscriptions") {
         let products = [];
-        productItems.forEach((productItem) => {
+        productItems.forEach(productItem => {
           if (productItem.type === "recurring") {
             products.push(productItem);
           }
