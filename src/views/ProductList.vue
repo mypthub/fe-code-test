@@ -42,8 +42,8 @@ export default {
     };
   },
   watch: {
-    select: function(oldVal, newVal) {
-      this.selectedFilter = newVal;
+    select: function(val) {
+      this.selectedFilter = val;
     }
   }
 };
