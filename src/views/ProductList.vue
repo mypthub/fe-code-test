@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <label for="selector">
       Filter:
       <select v-model="select" id="selector">
@@ -88,3 +88,36 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+.container {
+  max-width: 1600px;
+  margin: auto;
+}
+
+ul {
+  padding-inline-start: 0;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+  @media screen and (max-width: 270px) {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+}
+
+li {
+  border-color: #316b68;
+  border-style: solid;
+  border-width: thick;
+  padding-top: 75%;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  img {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+  }
+}
+</style>
