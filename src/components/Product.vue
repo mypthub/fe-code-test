@@ -33,6 +33,48 @@ export default {
 </script>
 
 <style lang="scss">
-.product {
+.top {
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+  top: 0;
+  height: 70%;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #4a4d4d;
+  position: absolute;
+  width: 100%;
+  text-align: left;
+  z-index: 1;
+  bottom: 0;
+  height: 30%;
+  div {
+    font-size: 14px;
+    margin: 1% 10px;
+    color: #fff;
+    font-weight: 600;
+    div {
+      float: left;
+      margin: 0;
+    }
+  }
+  .descr {
+    font-size: 11px;
+    font-weight: 300;
+  }
+  .product-text-title {
+    margin-top: 10px;
+  }
+  .price-old {
+    text-decoration: line-through;
+  }
+  .price-new {
+    margin-left: 5px;
+  }
 }
 </style>

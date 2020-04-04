@@ -10,8 +10,8 @@
         <option value="subscriptions" selected>Subscriptions</option>
       </select>
     </label>
-    <ul>
-      <li v-for="product in products" :key="product.id">
+    <ul class="cards">
+      <li class="card" v-for="product in products" :key="product.id">
         <Product
           :title="product.title"
           :price="product.price"
@@ -94,18 +94,29 @@ export default {
   margin: auto;
 }
 
-ul {
+.cards {
   padding-inline-start: 0;
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+  @media (min-width: 601px) and (max-width: 800px) {
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+  }
+  @media (min-width: 801px) and (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  }
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(auto-fill, minmax(22%, 1fr));
+  }
 
   @media screen and (max-width: 270px) {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
 }
 
-li {
+.card {
   border-color: #316b68;
   border-style: solid;
   border-width: thick;
