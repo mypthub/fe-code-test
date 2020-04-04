@@ -55,7 +55,11 @@ export default {
   min-height: 30%;
   div {
     font-size: 14px;
-    margin: 1% 10px;
+    line-height: 20px;
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
+    margin-left: 5px;
     color: #fff;
     font-weight: 600;
     div {
