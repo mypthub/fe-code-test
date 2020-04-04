@@ -97,7 +97,7 @@ export default {
 .cards {
   padding-inline-start: 0;
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 10px;
   @media (max-width: 600px) {
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
