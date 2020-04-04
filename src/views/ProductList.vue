@@ -24,17 +24,43 @@ export default {
   name: "ProductList",
   computed: {
     products() {
-      if (this.selectedFilter == "all") {
-        let products = [...new Array(productItems.length)];
-        for (let i = 1; i < productItems.length - 1; i -= -1) {
-          products.forEach((product, idx) => {
-            if (idx == i) {
-              products.push(productItems[idx]);
+      if (this.selectedFilter === "all") {
+        return productItems;
+        // return products;
+      } else if (this.selectedFilter === "purchased") {
+          let products = [];
+          productItems.forEach((productItem) => {
+            if (productItem.purchased) {
+              products.push(productItem);
             }
-          });
-        }
+        });
+          return products;
+      } else if (this.selectedFilter === "unpurchased") {
+        let products = [];
+        productItems.forEach((productItem) => {
+          if (!productItem.purchased) {
+            products.push(productItem);
+          }
+        });
+        return products;
+      } else if (this.selectedFilter === "one-time-purchases") {
+        let products = [];
+        productItems.forEach((productItem) => {
+          if (productItem.type === "onetime") {
+            products.push(productItem);
+          }
+        });
+        return products;
+      } else if (this.selectedFilter === "subscriptions") {
+        let products = [];
+        productItems.forEach((productItem) => {
+          if (productItem.type === "recurring") {
+            products.push(productItem);
+          }
+        });
         return products;
       }
+
       return "Product";
     }
   },
