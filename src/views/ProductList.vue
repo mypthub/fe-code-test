@@ -4,7 +4,10 @@
       Filter:
       <select v-model="select" id="selector">
         <option value="all" selected>All</option>
-        <option value="test" selected>test</option>
+        <option value="purchased" selected>Purchased</option>
+        <option value="unpurchased" selected>Unpurchased</option>
+        <option value="one-time-purchases" selected>One time purchases</option>
+        <option value="subscriptions" selected>Subscriptions</option>
       </select>
     </label>
     <h1>SELECTED FILTER: {{ selectedFilter }}</h1>
