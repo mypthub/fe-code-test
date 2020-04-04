@@ -52,7 +52,7 @@ export default {
   text-align: left;
   z-index: 1;
   bottom: 0;
-  height: 30%;
+  min-height: 30%;
   div {
     font-size: 14px;
     margin: 1% 10px;
