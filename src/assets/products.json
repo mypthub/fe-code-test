@@ -30,7 +30,7 @@
     "title": "Protein Shaker",
     "image": "https://picsum.photos/id/113/400/300",
     "description": "MyPTHub Branded protein shaker",
-    "price": 899,
+    "price": 899, 
     "purchased": false,
     "cycle": null,
     "type": "onetime",

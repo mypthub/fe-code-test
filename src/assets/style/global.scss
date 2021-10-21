@@ -1,0 +1,31 @@
+// I was going to simply use Bootstrap, but @latest's media queries do not match your specified in the test, so just wrote these.
+
+// Vars.
+$screen_sm: 601px;
+$screen_md: 800px;
+$screen_lg: 1024px;
+ 
+
+// Wrapper for main content.
+.container {
+  margin: 0 auto;
+  max-width: 1600px;
+
+  .col {
+    float: left;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    @media screen and (min-width: $screen_sm ) {
+      width: 50%;
+    }
+    @media screen and (min-width: $screen_md ) {
+      width: 33.3%;
+    }
+    @media screen and (min-width: $screen_lg ) {
+      width: 25%;
+    }
+  }
+}
