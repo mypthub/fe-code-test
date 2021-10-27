@@ -10,7 +10,7 @@
     <p>2. Use your component in <code>ProductList.vue</code>.</p>
     <p>
       3. Review the code in <code>ProductList.vue</code> and fix the bugs that
-      exist.
+      exist. There is one issue that can cause incorrect items to render or potential image flickering when filtering.
     </p>
     <p>4. Add additional filters in <code>ProductList.vue</code></p>
 
